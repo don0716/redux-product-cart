@@ -32,7 +32,7 @@ const cartTotal = document.querySelector("#cartTotal");
 window.handleAddToCart = (prodId) => {
   const product = products.find((prod) => prod.id === prodId);
   console.log("Dispatching addToCart::", addToCart(product));
-  store.dispatch(addToCart(product));
+  store.dispatch(addToCart({ ...product, quantity: 1 }));
   store.dispatch(calculateTotal());
 };
 productList.innerHTML = "";
@@ -47,9 +47,9 @@ productList.innerHTML = products
   )
   .join("");
 
-window.handleRemoveFromCart = (index) => {
-  console.log("INDEX:: ", index);
-  store.dispatch(removeFromCart(index));
+window.handleRemoveFromCart = (prodId) => {
+  console.log("prodId:: ", prodId);
+  store.dispatch(removeFromCart(prodId));
   store.dispatch(calculateTotal());
 };
 
@@ -57,11 +57,12 @@ window.handleRemoveFromCart = (index) => {
 const updateCart = () => {
   console.log("STATE:: ", store.getState());
   cartItemsList.innerHTML = "";
+
   cartItemsList.innerHTML = store
     .getState()
     .cart.map(
       (cart, index) => `
-      <li> <strong>ID: </strong> ${cart.id} | <strong>Name: </strong> ${cart.name} | <strong>Price: </strong> ${cart.price} | <strong>INDEX: </strong> ${index} | <button onClick="handleRemoveFromCart(${index})" >DELETE</button> </li> 
+      <li> <strong>ID: </strong> ${cart.id} | <strong>Name: </strong> ${cart.name} | <strong>Price: </strong> ${cart.price} | <strong>Quantity: ${cart.quantity} </strong>  |  <strong>INDEX: </strong> ${index} | <button onClick="handleRemoveFromCart(${cart.id})" >DELETE</button> </li> 
       `
     )
     .join("");

@@ -7,9 +7,9 @@ export const addToCart = (product) => ({
   payload: product,
 });
 
-export const removeFromCart = (index) => ({
+export const removeFromCart = (prodId) => ({
   type: REMOVE_FROM_CART,
-  payload: index,
+  payload: prodId,
 });
 
 export const calculateTotal = () => ({
