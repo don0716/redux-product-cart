@@ -1,0 +1,5 @@
+1 .  npm create vite@latest my-vite-project -- --template vanilla
+     Explanation:
+     npm create vite@latest: Creates a new Vite project.
+     my-vite-project: Your project folder name.
+     --template vanilla: Sets up a basic HTML + JS project (no framework).
